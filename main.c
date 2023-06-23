@@ -1,56 +1,38 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-int main(void) {
+int is_there_digit_number(int digit_number){
+  return (digit_number >= 100 && digit_number <= 999);
+}//여러번 길게 쓰면 안 이쁘니까
 
-  int n1 = 0;
-  int ca[] = {0};
-  //int sn0 =0, sn1 = 0, sn2=0;
-  int sn[] = {0};
-  char s_number[20];
-  int num = 0, i;
+int main(void){
 
-  scanf("%d", &n1);
-  scanf("%s", s_number);
-  int strl = strlen(s_number);
+ int num1 = 0;
+ int num2 = 0;
 
-  for (i = 0; s_number[i] != 0; i++) {
-    sn[i] = s_number[i] - '0';
-    printf("%d\n", sn[i]);
-  }
-  printf("%d\n", sn[0]);
-  printf("%d\n", sn[1]);
-  printf("%d\n", sn[2]);
-
-  for (i = 0; s_number[i] != 0; i++){
-    int set_ = strl - i - 1;
-    
-    ca[set_] = sn[set_]*n1;
+ scanf("%d", &num1);
+  if (!is_there_digit_number(num1)){
+    printf("세 자리 숫자가 아닙니다. 다시 입력해주세요\n");
+    return main();
+  }//예외 처리
   
-    printf("%d %d %d\n", set_, sn[set_], ca[set_]);
-    
+ scanf("%d",&num2);
+  if(!is_there_digit_number(num2)){
+     printf("세 자리 숫자가 아닙니다. 다시 입력해주세요\n");
+    return main();
+  }//예외 처리
+
+  int digit[3] = {0};
+  int number[3]= {0};
+  
+  digit[2] = num2 / 100; //백의 자리
+  digit[1] = (num2 / 10) % 10; // 십의 자리
+  digit[0] = num2 % 10; // 일의 자리
+
+  for(int i=0; i<3; i++){
+    number[i] = num1 * digit[i];
+    printf("%d\n", number[i]);
   }
 
-  /*
-
-    sn0 = s_number[0] - '0';
-    sn1 = s_number[1] - '0';
-    sn2 = s_number[2] - '0';
-
-    n2 = n1*sn0*100;
-    n3 = n1*sn1*10;
-    n4 = n1*sn2;
-
-    int con = n2 + n3+ n4;
-
-
-    printf("%d\n%d\n%d\n%d\n", n4, n3, n2, con);
-
-
-
-
-  */
-
-  return 0;
+  printf("%d\n", num1*num2);
+ 
 }
